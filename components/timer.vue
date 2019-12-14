@@ -10,8 +10,7 @@
         {{time}}
 
       </h2>
-      <button id="button" class="subtitle button is-danger is-light">Danger</button>
-      
+      <button v-show="oldbtn" @click="btnclick()" class="button is-fullwidth">{{btntext}}</button>
     </div>
   </div>
 </section>
@@ -38,9 +37,15 @@ const sleep = (ms) => {
 	export default{
 	data(){
 		return{
-			time: 3,
-			iteration:1
+			time: 60,
+			iteration:1,
+			oldbtn : true,
+			btntext: "One click to Enable sound"
 
+		}
+	},
+	methods:{
+		async btnclick(){
 		}
 	},
 	watch:{
@@ -50,9 +55,10 @@ const sleep = (ms) => {
 			let audio = document.getElementsByTagName('audio')
 			console.log(audio[0])
 			// await sleep(1000000000)
+			await sleep(100)
 			await audio[0].play()
 			await sleep(2000)
-			// this.$router.go()
+			this.$router.go()
 		}
 	},		
 	async created(){
@@ -87,6 +93,7 @@ const sleep = (ms) => {
 	display: flex;
 	padding: 10px;
 	justify-content: center;
+	font-size: 40px;
 }
 .hero.is-success{
 	background-color: #34495e;
